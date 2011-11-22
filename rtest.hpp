@@ -116,6 +116,27 @@ void runAllTests();
                                                                    \
     void groupname##testname::run()
 
+#define RTEST_TEST_F(groupname, testname)			\
+    class groupname##testname : public groupname {		\
+        const char* name() const;                                  \
+        void run();                                               \
+        void internalRun();                                       \
+    };                                                             \
+                                                                   \
+    groupname##testname groupname##testname##_instance;            \
+                                                                   \
+    const char* groupname##testname::name() const {                \
+        return RTEST_TYPE2STR(groupname) RTEST_TYPE2STR(testname); \
+    }                                                              \
+                                                                   \
+    void groupname##testname::run() {                              \
+        groupname::SetUp();                                       \
+        internalRun();                                             \
+        groupname::TearDown();                                    \
+    }                                                              \
+                                                                   \
+    void groupname##testname::internalRun()
+
 #define RTEST_ASSERT_EQ(expect, value) RTest::assertEq(expect, value)
 
 #define RTEST_ASSERT_NE(expect, value) RTest::assertNe(expect, value)

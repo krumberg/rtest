@@ -22,28 +22,35 @@
 
 #include <stdio.h>
 
-RTEST_TEST(mymodule, test_ok) {
-    RTEST_ASSERT_EQ(1, 1);
+class MyTest : public RTest::ASingleTest {
+public:
+    void SetUp() {
+        puts("SetUp");
+    }
+
+    void TearDown() {
+        puts("TearDown");
+    }
+};
+
+RTEST_TEST_F(MyTest, test1) {
+    puts("test1");
+    RTEST_ASSERT_TRUE(false);
 }
 
-RTEST_TEST(mymodule, test_ok_different) {
-    RTEST_ASSERT_NE(1, 2);
+RTEST_TEST_F(MyTest, test2) {
+    puts("test1");
+    RTEST_ASSERT_TRUE(true);
 }
 
-RTEST_TEST(mymodule, test_fail_different) {
-    RTEST_ASSERT_EQ(1, 2);
+RTEST_TEST_F(MyTest, test3) {
+    puts("test2");
+    RTEST_ASSERT_EQ(3, 3);
 }
 
-RTEST_TEST(mymodule, test_fail_same) {
-    RTEST_ASSERT_NE(5, 5);
-}
-
-RTEST_TEST(mymodule, test_fail_false) {
-    RTEST_ASSERT_TRUE(3 == 4);
-}
-
-RTEST_TEST(mymodule, test_fail_true) {
-    RTEST_ASSERT_FALSE(3 == 3);
+RTEST_TEST(MyTestNoF, test4) {
+    puts("test3");
+    RTEST_ASSERT_EQ(3, 4);
 }
 
 int main()
