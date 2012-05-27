@@ -73,13 +73,21 @@ void dispAssertEqFailed(const std::string& expect, const std::string& value)
 {
     redColor();
     std::cerr << "\t" << "Expected <" << expect << ">, got <" << value << ">" << std::endl;
+    exit(-1);
 }
 
 void dispAssertNeFailed(const std::string& expect, const std::string& value)
 {
     redColor();
     std::cerr << "\t" << "Expected <" << expect << ">, got a different value than <" << value << ">" << std::endl;
-    // Supposed to die here! Call exit(-1) or something simular
+    exit(-1);
+}
+
+void dieWithError(const std::string& expect)
+{
+    redColor();
+    std::cerr << "Fail: " << expect << std::endl;
+    exit(-1);
 }
 
 class ColorResetter {

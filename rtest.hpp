@@ -31,6 +31,7 @@ namespace RTest {
           View
 *************************/
 
+void dieWithError(const std::string& expect);
 void dispAssertEqFailed(const std::string& expect, const std::string& value);
 void dispAssertNeFailed(const std::string& expect, const std::string& value);
 
@@ -63,7 +64,7 @@ std::string toStr(A a)
 }
 
 template <typename A>
-void assertEq(A expect, A value)
+void assertEq(const A& expect, const A& value)
 {
     if (expect != value) {
         dispAssertEqFailed(toStr(expect), toStr(value));
@@ -71,7 +72,7 @@ void assertEq(A expect, A value)
 }
 
 template <typename A>
-void assertNe(A expect, A value)
+void assertNe(const A& expect, const A& value)
 {
     if (expect == value) {
         dispAssertNeFailed(toStr(expect), toStr(value));
@@ -144,5 +145,7 @@ void runAllTests();
 #define RTEST_ASSERT_TRUE(value) RTest::assertTrue(value)
 
 #define RTEST_ASSERT_FALSE(value) RTest::assertFalse(value)
+
+#define RTEST_ASSERT_FAIL(value)
 
 #endif /* RTEST_HPP */

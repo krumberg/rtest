@@ -1,6 +1,7 @@
 project (RTEST)
 
-add_subdirectory (rtest)
-include_directories(${RTEST_SOURCE_DIR}/rtest)
+add_library(rtest rtest.cpp)
+
+include_directories(${RTEST_SOURCE_DIR})
 
 add_subdirectory (examples)
