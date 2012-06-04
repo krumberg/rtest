@@ -22,7 +22,7 @@
 
 #include <stdio.h>
 
-class MyTest : public RTest::ASingleTest {
+class PrefixTest : public RTest::ASingleTest {
 public:
     void SetUp() {
         puts("SetUp");
@@ -33,22 +33,22 @@ public:
     }
 };
 
-RTEST_TEST_F(MyTest, test1) {
+RTEST_TEST_F(PrefixTest, test1) {
     puts("test1");
     RTEST_ASSERT_TRUE(false);
 }
 
-RTEST_TEST_F(MyTest, test2) {
+RTEST_TEST_F(PrefixTest, test2) {
     puts("test1");
     RTEST_ASSERT_TRUE(true);
 }
 
-RTEST_TEST_F(MyTest, test3) {
+RTEST_TEST_F(PrefixTest, test3) {
     puts("test2");
     RTEST_ASSERT_EQ(3, 3);
 }
 
-RTEST_TEST(MyTestNoF, test4) {
+RTEST_TEST(PrefixTestNoFixture, test4) {
     puts("test3");
     RTEST_ASSERT_EQ(3, 4);
 }

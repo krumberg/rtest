@@ -138,14 +138,21 @@ void runAllTests();
                                                                    \
     void groupname##testname::internalRun()
 
+#ifdef RTEST_SKIP_PREFIX
+	#define TEST         RTEST_TEST
+	#define TEST_F       RTEST_TEST_F
+
+	#define ASSERT_EQ    RTEST_ASSERT_EQ
+	#define ASSERT_NE    RTEST_ASSERT_NE
+	#define ASSERT_TRUE  RTEST_ASSERT_TRUE
+	#define ASSERT_FALSE RTEST_ASSERT_FALSE
+	#define ASSERT_FAIL  RTEST_ASSERT_FAIL
+#endif
+
 #define RTEST_ASSERT_EQ(expect, value) RTest::assertEq(expect, value)
-
 #define RTEST_ASSERT_NE(expect, value) RTest::assertNe(expect, value)
-
 #define RTEST_ASSERT_TRUE(value) RTest::assertTrue(value)
-
 #define RTEST_ASSERT_FALSE(value) RTest::assertFalse(value)
-
 #define RTEST_ASSERT_FAIL(value)
 
 #endif /* RTEST_HPP */
