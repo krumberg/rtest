@@ -20,6 +20,8 @@
 
 #include <iostream>
 
+#include <stdlib.h>
+
 #include "rtest.hpp"
 
 namespace {
