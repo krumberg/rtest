@@ -72,17 +72,17 @@ void dispTestRan(const char* name)
 
 namespace RTest {
 
-void dispAssertEqFailed(const std::string& expect, const std::string& value)
+void dispAssertEqFailed(const char* expr, const std::string& expect, const std::string& value)
 {
     redColor();
-    std::cerr << "\t" << "Expected <" << expect << ">, got <" << value << ">" << std::endl;
+    std::cerr << "\t" << "Expected <" << expect << ">, got <" << expr << "> (which is " << value << ")" << std::endl;
     exit(-1);
 }
 
-void dispAssertNeFailed(const std::string& expect, const std::string& value)
+void dispAssertNeFailed(const char* expr, const std::string& expect, const std::string& value)
 {
     redColor();
-    std::cerr << "\t" << "Expected <" << expect << ">, got a different value than <" << value << ">" << std::endl;
+    std::cerr << "\t" << "Expected <" << expect << "> and <" << value << "> (which is <" << value << ">) to differ" << std::endl;
     exit(-1);
 }
 

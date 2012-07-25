@@ -32,8 +32,8 @@ namespace RTest {
 *************************/
 
 void dieWithError(const std::string& expect);
-void dispAssertEqFailed(const std::string& expect, const std::string& value);
-void dispAssertNeFailed(const std::string& expect, const std::string& value);
+void dispAssertEqFailed(const char* expr, const std::string& expect, const std::string& value);
+void dispAssertNeFailed(const char* expr, const std::string& expect, const std::string& value);
 
 /*************************
    Model and controller
@@ -64,32 +64,32 @@ std::string toStr(A a)
 }
 
 template <typename A>
-void assertEq(const A& expect, const A& value)
+void assertEq(const char* expr, const A& expect, const A& value)
 {
     if (expect != value) {
-        dispAssertEqFailed(toStr(expect), toStr(value));
+        dispAssertEqFailed(expr, toStr(expect), toStr(value));
     }
 }
 
 template <typename A>
-void assertNe(const A& expect, const A& value)
+void assertNe(const char* expr, const A& expect, const A& value)
 {
     if (expect == value) {
-        dispAssertNeFailed(toStr(expect), toStr(value));
+        dispAssertNeFailed(expr, toStr(expect), toStr(value));
     }
 }
 
-inline void assertTrue(bool value)
+inline void assertTrue(const char* expr, bool value)
 {
     if (!value) {
-        dispAssertEqFailed("true", "false");
+        dispAssertEqFailed(expr, "true", "false");
     }
 }
 
-inline void assertFalse(bool value)
+inline void assertFalse(const char* expr, bool value)
 {
     if (value) {
-        dispAssertEqFailed("false", "true");
+        dispAssertEqFailed(expr, "false", "true");
     }
 }
 
@@ -149,10 +149,10 @@ void runAllTests();
 	#define ASSERT_FAIL  RTEST_ASSERT_FAIL
 #endif
 
-#define RTEST_ASSERT_EQ(expect, value) RTest::assertEq(expect, value)
-#define RTEST_ASSERT_NE(expect, value) RTest::assertNe(expect, value)
-#define RTEST_ASSERT_TRUE(value) RTest::assertTrue(value)
-#define RTEST_ASSERT_FALSE(value) RTest::assertFalse(value)
+#define RTEST_ASSERT_EQ(expect, value) RTest::assertEq(#value, expect, value)
+#define RTEST_ASSERT_NE(expect, value) RTest::assertNe(#value, expect, value)
+#define RTEST_ASSERT_TRUE(value) RTest::assertTrue(#value, value)
+#define RTEST_ASSERT_FALSE(value) RTest::assertFalse(#value, value)
 #define RTEST_ASSERT_FAIL(value)
 
 #endif /* RTEST_HPP */
