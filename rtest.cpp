@@ -21,6 +21,7 @@
 #include <iostream>
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "rtest.hpp"
 
