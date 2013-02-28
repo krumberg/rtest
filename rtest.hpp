@@ -63,16 +63,16 @@ std::string toStr(A a)
     return ss.str();
 }
 
-template <typename A>
-void assertEq(const char* expr, const A& expect, const A& value)
+template <typename A, typename B>
+void assertEq(const char* expr, A expect, B value)
 {
     if (expect != value) {
         dispAssertEqFailed(expr, toStr(expect), toStr(value));
     }
 }
 
-template <typename A>
-void assertNe(const char* expr, const A& expect, const A& value)
+template <typename A, typename B>
+void assertNe(const char* expr, A expect, B value)
 {
     if (expect == value) {
         dispAssertNeFailed(expr, toStr(expect), toStr(value));
