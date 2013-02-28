@@ -56,7 +56,7 @@ public:
 };
 
 template <typename A>
-std::string toStr(A a)
+std::string toStr(const A& a)
 {
     std::stringstream ss;
     ss << a;
@@ -64,7 +64,7 @@ std::string toStr(A a)
 }
 
 template <typename A, typename B>
-void assertEq(const char* expr, A expect, B value)
+void assertEq(const char* expr, const A& expect, const B& value)
 {
     if (expect != value) {
         dispAssertEqFailed(expr, toStr(expect), toStr(value));
@@ -72,7 +72,7 @@ void assertEq(const char* expr, A expect, B value)
 }
 
 template <typename A, typename B>
-void assertNe(const char* expr, A expect, B value)
+void assertNe(const char* expr, const A& expect, const B& value)
 {
     if (expect == value) {
         dispAssertNeFailed(expr, toStr(expect), toStr(value));
