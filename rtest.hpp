@@ -21,6 +21,8 @@
 #ifndef RTEST_HPP
 #define RTEST_HPP
 
+#include <stdlib.h>
+
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -106,7 +108,11 @@ void runAllTests();
 #define RTEST_TEST(groupname, testname)                            \
     class groupname##testname : public RTest::ASingleTest {        \
         const char* name() const;                                  \
+        void start();                                              \
+        void initTestDir();                                        \
         void run();                                                \
+                                                                   \
+        std::string TMP_PATH;                                       \
     };                                                             \
                                                                    \
     groupname##testname groupname##testname##_instance;            \
@@ -115,7 +121,19 @@ void runAllTests();
         return RTEST_TYPE2STR(groupname) RTEST_TYPE2STR(testname); \
     }                                                              \
                                                                    \
-    void groupname##testname::run()
+    void groupname##testname::run() {                              \
+        initTestDir();                                             \
+        start();                                                   \
+    }                                                              \
+                                                                   \
+    void groupname##testname::initTestDir() {                      \
+        TMP_PATH = std::string("tests/tmp/") + name();            \
+                                                                   \
+        ::system(("rm -rf " + TMP_PATH).c_str());                  \
+        ::system(("mkdir -p " + TMP_PATH).c_str());                \
+    }                                                              \
+                                                                   \
+    void groupname##testname::start()
 
 #define RTEST_TEST_F(groupname, testname)			\
     class groupname##testname : public groupname {		\
@@ -127,7 +145,7 @@ void runAllTests();
     groupname##testname groupname##testname##_instance;            \
                                                                    \
     const char* groupname##testname::name() const {                \
-        return RTEST_TYPE2STR(groupname) RTEST_TYPE2STR(testname); \
+        return RTEST_TYPE2STR(groupname) "_" RTEST_TYPE2STR(testname); \
     }                                                              \
                                                                    \
     void groupname##testname::run() {                              \
