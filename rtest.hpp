@@ -118,7 +118,7 @@ void runAllTests();
     groupname##testname groupname##testname##_instance;            \
                                                                    \
     const char* groupname##testname::name() const {                \
-        return RTEST_TYPE2STR(groupname) RTEST_TYPE2STR(testname); \
+        return RTEST_TYPE2STR(groupname) "_" RTEST_TYPE2STR(testname); \
     }                                                              \
                                                                    \
     void groupname##testname::run() {                              \
