@@ -160,6 +160,7 @@ void runAllTests();
 	#define TEST         RTEST_TEST
 	#define TEST_F       RTEST_TEST_F
 
+	#define ASSERT_FAIL  RTEST_ASSERT_FAIL
 	#define ASSERT_EQ    RTEST_ASSERT_EQ
 	#define ASSERT_NE    RTEST_ASSERT_NE
 	#define ASSERT_TRUE  RTEST_ASSERT_TRUE
@@ -167,6 +168,7 @@ void runAllTests();
 	#define ASSERT_FAIL  RTEST_ASSERT_FAIL
 #endif
 
+#define RTEST_ASSERT_FAIL(msg) RTest::dieWithError(msg, __LINE__)
 #define RTEST_ASSERT_EQ(expect, value) RTest::assertEq(#value, expect, value, __LINE__)
 #define RTEST_ASSERT_NE(expect, value) RTest::assertNe(#value, expect, value, __LINE__)
 #define RTEST_ASSERT_TRUE(value) RTest::assertTrue(#value, value, __LINE__)
